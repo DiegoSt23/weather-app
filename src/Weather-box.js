@@ -39,7 +39,7 @@ function WeatherBox() {
         }
         petition();             
     }, [latitude, longitude,temperatureC]);
-
+    
     useEffect(() => {
         const petition = async () => {  
             let url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=f45251d3ea56d5b3855dcf77bcd6d099&units=imperial`      

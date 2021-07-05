@@ -1,12 +1,16 @@
+import React from 'react';
+import { Suspense } from 'react';
 import './App.css';
-import WeatherBox from './Weather-box';
+const WeatherBox = React.lazy(() => import("./Weather-box"))
 
 function App() {
   return (
     <div>
       <header className="App-header">
         <h1>Weather App</h1>
-        <WeatherBox/>             
+        <Suspense fallback={<div className="spinner">Loading...</div>}>
+          <WeatherBox/>
+        </Suspense>
       </header>
     </div>
   );
