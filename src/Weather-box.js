@@ -15,12 +15,17 @@ function WeatherBox() {
     const [wind, setWind] = useState("");
     const [clouds, setClouds] = useState("");
     const [humidity, setHumidity] = useState("");
-
+   
     useEffect(() => {
-        navigator.geolocation.getCurrentPosition(function(position) {
+        function success(position) {
             setLatitude(position.coords.latitude);
-            setLongitude(position.coords.longitude);         
-        });
+            setLongitude(position.coords.longitude);
+
+        };
+        function error() {
+            alert("Please turn on your location")
+        };
+        navigator.geolocation.getCurrentPosition(success, error);       
     }, []);
 
     useEffect(() => {
@@ -38,7 +43,7 @@ function WeatherBox() {
             setDegrees(temperatureC)
         }
         petition();             
-    }, [latitude, longitude,temperatureC]);
+    }, [latitude, longitude, temperatureC]);
 
     useEffect(() => {
         const petition = async () => {  
