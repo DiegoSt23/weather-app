@@ -20,10 +20,9 @@ function WeatherBox() {
         function success(position) {
             setLatitude(position.coords.latitude);
             setLongitude(position.coords.longitude);
-
         };
         function error() {
-            alert("Please turn on your location")
+            alert("Please turn on your location and reload the page.")
         };
         navigator.geolocation.getCurrentPosition(success, error);       
     }, []);
