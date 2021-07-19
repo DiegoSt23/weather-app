@@ -28,29 +28,33 @@ function WeatherBox() {
     }, []);
 
     useEffect(() => {
-        const petition = async () => {  
-            let url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=f45251d3ea56d5b3855dcf77bcd6d099&units=metric`      
-            const data = await fetch(url).then(res => res.json())
-            setName(data.name);
-            setCountry(data.sys.country);
-            setIcon(`https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png`)
-            setTemperatureC(data.main.temp + "°C");            
-            setWeather(data.weather[0].description);
-            setWind(data.wind.speed);
-            setClouds(data.clouds.all);
-            setHumidity(data.main.humidity);
-            setDegrees(temperatureC)
-        }
-        petition();             
+        if (latitude) {
+            const petition = async () => {  
+                let url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=f45251d3ea56d5b3855dcf77bcd6d099&units=metric`      
+                const data = await fetch(url).then(res => res.json())
+                setName(data.name);
+                setCountry(data.sys.country);
+                setIcon(`https://openweathermap.org/img/wn/${data.weather[0].icon}@4x.png`)
+                setTemperatureC(data.main.temp + "°C");            
+                setWeather(data.weather[0].description);
+                setWind(data.wind.speed);
+                setClouds(data.clouds.all);
+                setHumidity(data.main.humidity);
+                setDegrees(temperatureC)
+            }
+            petition();
+        }                            
     }, [latitude, longitude, temperatureC]);
 
     useEffect(() => {
-        const petition = async () => {  
-            let url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=f45251d3ea56d5b3855dcf77bcd6d099&units=imperial`      
-            const data = await fetch(url).then(res => res.json())
-            setTemperatureF(data.main.temp + "°F");            
-        }
-        petition();             
+        if (latitude) {
+            const petition = async () => {  
+                let url = `https://api.openweathermap.org/data/2.5/weather?lat=${latitude}&lon=${longitude}&appid=f45251d3ea56d5b3855dcf77bcd6d099&units=imperial`      
+                const data = await fetch(url).then(res => res.json())
+                setTemperatureF(data.main.temp + "°F");            
+            }
+            petition();
+        }                           
     }, [latitude, longitude]);
         
     const degreesChanger = () => {        
