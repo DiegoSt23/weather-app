@@ -19,6 +19,16 @@
   padding: 35px;
   font-weight: 100;
 }
+.alert {
+  width: 30%;
+  margin: auto;
+  background-color: rgb(52, 10, 150);
+  color: white;
+  padding: 8px;
+  border: solid 2px rgb(52, 10, 150);
+  border-radius: 15px;
+  margin-top: 15px;
+}
 .text-size {
   font-size: 2rem;
 }
@@ -80,6 +90,9 @@ button:hover {
   .icon {
     width: 50%;
   }
+  .alert {
+    width: 50%;
+  }
 }
 @media screen and (max-width: 576px) {
   .sub-container2 {
@@ -100,6 +113,9 @@ button:hover {
   button:hover {
     background-color: rgb(61, 8, 184);
     border: solid 2px rgb(61, 8, 184);
+  }
+  .alert {
+    width: 60%;
   }
 }
 

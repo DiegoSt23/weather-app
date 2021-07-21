@@ -3,6 +3,7 @@ import {FontAwesomeIcon} from "@fortawesome/react-fontawesome";
 import { faSun, faWind, faCloud, faTint} from "@fortawesome/free-solid-svg-icons";
           
 function WeatherBox() {
+    const [condition, setCondition] = useState(true);
     const [latitude, setLatitude] = useState();
     const [longitude, setLongitude] = useState();
     const [name, setName] = useState("");
@@ -20,13 +21,14 @@ function WeatherBox() {
         function success(position) {
             setLatitude(position.coords.latitude);
             setLongitude(position.coords.longitude);
+            setCondition(true)
         };
         function error() {
-            alert("Please turn on your location and reload the page.")
+            setCondition(false)
         };
         navigator.geolocation.getCurrentPosition(success, error);       
-    }, []);
-
+    }, [condition]);
+    
     useEffect(() => {
         if (latitude) {
             const petition = async () => {  
@@ -44,7 +46,7 @@ function WeatherBox() {
             }
             petition();
         }                            
-    }, [latitude, longitude, temperatureC]);
+    }, [latitude, longitude, temperatureC, condition]);
 
     useEffect(() => {
         if (latitude) {
@@ -55,7 +57,7 @@ function WeatherBox() {
             }
             petition();
         }                           
-    }, [latitude, longitude]);
+    }, [latitude, longitude, condition]);
         
     const degreesChanger = () => {        
         if (degrees === temperatureC) {
@@ -64,9 +66,10 @@ function WeatherBox() {
             setDegrees(temperatureC)
         }
     };
-
+    
     return (
-        <div className="container">            
+        <div className="container">   
+            {condition ? <p></p> : <p className="alert">Please turn on your location and reload this page.</p>}         
             <h3 className="text-size">{name}, {country}</h3>
             <div className="container2">
                 <div className="sub-container text-size">  
